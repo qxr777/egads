@@ -4,17 +4,17 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.yahoo.egads</groupId>
   <artifactId>egads</artifactId>
-  
+
   <name>EGADS Anomaly Detection System</name>
   <description>EGADS system, consumes time series and outputs anomalies.</description>
   <version>0.4.6-SNAPSHOT</version>
-  
+
   <organization>
     <name>Yahoo Inc.</name>
     <url>https://www.yahoo.com/</url>
   </organization>
   <inceptionYear>2015</inceptionYear>
-  
+
   <developers>
     <developer>
       <organization>Yahoo Inc.</organization>
@@ -29,7 +29,7 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
-  
+
   <packaging>jar</packaging>
 
   <parent>
@@ -43,7 +43,7 @@
     <connection>scm:git:https://github.com/yahoo/egads.git</connection>
     <tag>HEAD</tag>
   </scm>
-  
+
   <issueManagement>
     <system>Github</system>
     <url>https://github.com/yahoo/egads/issues</url>
@@ -53,30 +53,30 @@
     <system>Travis</system>
     <url>https://travis-ci.org/yahoo/egads</url>
   </ciManagement>
-  
+
   <dependencyManagement>
     <dependencies>
-    <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-api</artifactId>
-        <version>1.7.7</version>
-      </dependency>
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>log4j-over-slf4j</artifactId>
-        <version>1.7.7</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-api</artifactId>
-        <version>2.17.0</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-core</artifactId>
-        <version>2.17.0</version>
-      </dependency>
-        
+<!--    <dependency>-->
+<!--        <groupId>org.slf4j</groupId>-->
+<!--        <artifactId>slf4j-api</artifactId>-->
+<!--        <version>1.7.7</version>-->
+<!--      </dependency>-->
+<!--      <dependency>-->
+<!--        <groupId>org.slf4j</groupId>-->
+<!--        <artifactId>log4j-over-slf4j</artifactId>-->
+<!--        <version>1.7.7</version>-->
+<!--      </dependency>-->
+<!--      <dependency>-->
+<!--        <groupId>org.apache.logging.log4j</groupId>-->
+<!--        <artifactId>log4j-api</artifactId>-->
+<!--        <version>2.17.0</version>-->
+<!--      </dependency>-->
+<!--      <dependency>-->
+<!--        <groupId>org.apache.logging.log4j</groupId>-->
+<!--        <artifactId>log4j-core</artifactId>-->
+<!--        <version>2.17.0</version>-->
+<!--      </dependency>-->
+
       <dependency>
         <groupId>com.github.lbordowitz.openforecast</groupId>
         <artifactId>openforecast</artifactId>
@@ -112,7 +112,7 @@
         <artifactId>commons-math3</artifactId>
         <version>3.2</version>
       </dependency>
-    
+
       <!-- TEST DEPENDENCIES -->
       <dependency>
         <groupId>org.testng</groupId>
@@ -124,9 +124,22 @@
   </dependencyManagement>
 
     <dependencies>
+<!--        <dependency>-->
+<!--         <groupId>org.slf4j</groupId>-->
+<!--         <artifactId>slf4j-api</artifactId>-->
+<!--        </dependency>-->
+        <!-- log4j2 -->
         <dependency>
-         <groupId>org.slf4j</groupId>
-         <artifactId>slf4j-api</artifactId>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.17.0</version>
+        </dependency>
+
+        <!-- SLF4J Bridge -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.17.0</version>
         </dependency>
 
         <dependency>
@@ -157,7 +170,7 @@
           <groupId>org.apache.commons</groupId>
           <artifactId>commons-math3</artifactId>
         </dependency>
-        
+
         <!-- TEST DEPENDENCIES -->
         <dependency>
           <groupId>org.testng</groupId>
@@ -177,7 +190,7 @@
                </descriptorRefs>
              </configuration>
            </plugin>
-           
+
            <plugin>
               <artifactId>maven-release-plugin</artifactId>
               <version>2.5.2</version>
@@ -189,7 +202,7 @@
                 </dependency>
               </dependencies>
             </plugin>
-            
+
             <plugin>
               <artifactId>maven-deploy-plugin</artifactId>
               <version>2.8.2</version>
@@ -213,7 +226,7 @@
                 <target>1.8</target>
                </configuration>
 	        </plugin>
-			 
+
             <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-javadoc-plugin</artifactId>
@@ -226,7 +239,7 @@
                 </execution>
               </executions>
             </plugin>
-			
+
 			<plugin>
 			  <groupId>org.apache.maven.plugins</groupId>
 			  <artifactId>maven-source-plugin</artifactId>
