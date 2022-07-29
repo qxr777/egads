@@ -1,123 +1,132 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.yahoo.egads</groupId>
-    <artifactId>egads</artifactId>
-    <name>EGADS Anomaly Detection System</name>
-    <description>EGADS system, consumes time series and outputs anomalies.</description>
-    <version>0.4.6-SNAPSHOT</version>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>edu.whut.cs.iot</groupId>
+  <artifactId>egads</artifactId>
+
+  <name>EGADS Anomaly Detection System</name>
+  <description>EGADS system, consumes time series and outputs anomalies.</description>
+  <version>0.5.0-SNAPSHOT</version>
+
+  <organization>
+    <name>Yahoo Inc.</name>
+    <url>https://www.yahoo.com/</url>
+  </organization>
+  <inceptionYear>2022</inceptionYear>
+
+  <developers>
+    <developer>
+      <organization>Yahoo Inc.</organization>
+      <organizationUrl>https://www.yahoo.com/</organizationUrl>
+    </developer>
+  </developers>
+
+  <licenses>
+    <license>
+      <name>GPL V3</name>
+      <url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <packaging>jar</packaging>
+
+  <parent>
+      <groupId>org.sonatype.oss</groupId>
+      <artifactId>oss-parent</artifactId>
+      <version>9</version>
+  </parent>
+
+  <scm>
+    <url>https://github.com/yahoo/egads</url>
+    <connection>scm:git:https://github.com/yahoo/egads.git</connection>
+    <tag>HEAD</tag>
+  </scm>
+
+  <issueManagement>
+    <system>Github</system>
+    <url>https://github.com/yahoo/egads/issues</url>
+  </issueManagement>
+
+  <ciManagement>
+    <system>Travis</system>
+    <url>https://travis-ci.org/yahoo/egads</url>
+  </ciManagement>
+
     <properties>
-        <fastjson_version>1.2.28</fastjson_version>
+        <github.global.server>github</github.global.server>
     </properties>
-    <organization>
-        <name>Yahoo Inc.</name>
-        <url>https://www.yahoo.com/</url>
-    </organization>
-    <inceptionYear>2015</inceptionYear>
-    <developers>
-        <developer>
-            <organization>Yahoo Inc.</organization>
-            <organizationUrl>https://www.yahoo.com/</organizationUrl>
-        </developer>
-    </developers>
-    <licenses>
-        <license>
-            <name>GPL V3</name>
-            <url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-    <packaging>jar</packaging>
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>9</version>
-    </parent>
-    <scm>
-        <url>https://github.com/yahoo/egads</url>
-        <connection>scm:git:https://github.com/yahoo/egads.git</connection>
-        <tag>HEAD</tag>
-    </scm>
-    <issueManagement>
-        <system>Github</system>
-        <url>https://github.com/yahoo/egads/issues</url>
-    </issueManagement>
-    <ciManagement>
-        <system>Travis</system>
-        <url>https://travis-ci.org/yahoo/egads</url>
-    </ciManagement>
-    <dependencyManagement>
-        <dependencies>
-            <!--     <dependency> -->
-            <!--         <groupId>org.slf4j</groupId> -->
-            <!--         <artifactId>slf4j-api</artifactId> -->
-            <!--         <version>1.7.7</version> -->
-            <!--       </dependency> -->
-            <!--       <dependency> -->
-            <!--         <groupId>org.slf4j</groupId> -->
-            <!--         <artifactId>log4j-over-slf4j</artifactId> -->
-            <!--         <version>1.7.7</version> -->
-            <!--       </dependency> -->
-            <!--       <dependency> -->
-            <!--         <groupId>org.apache.logging.log4j</groupId> -->
-            <!--         <artifactId>log4j-api</artifactId> -->
-            <!--         <version>2.17.0</version> -->
-            <!--       </dependency> -->
-            <!--       <dependency> -->
-            <!--         <groupId>org.apache.logging.log4j</groupId> -->
-            <!--         <artifactId>log4j-core</artifactId> -->
-            <!--         <version>2.17.0</version> -->
-            <!--       </dependency> -->
-            <dependency>
-                <groupId>com.github.lbordowitz.openforecast</groupId>
-                <artifactId>openforecast</artifactId>
-                <version>0.5.0</version>
-            </dependency>
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>5.1.41</version>
-            </dependency>
 
+  <dependencyManagement>
+    <dependencies>
+<!--    <dependency>-->
+<!--        <groupId>org.slf4j</groupId>-->
+<!--        <artifactId>slf4j-api</artifactId>-->
+<!--        <version>1.7.7</version>-->
+<!--      </dependency>-->
+<!--      <dependency>-->
+<!--        <groupId>org.slf4j</groupId>-->
+<!--        <artifactId>log4j-over-slf4j</artifactId>-->
+<!--        <version>1.7.7</version>-->
+<!--      </dependency>-->
+<!--      <dependency>-->
+<!--        <groupId>org.apache.logging.log4j</groupId>-->
+<!--        <artifactId>log4j-api</artifactId>-->
+<!--        <version>2.17.0</version>-->
+<!--      </dependency>-->
+<!--      <dependency>-->
+<!--        <groupId>org.apache.logging.log4j</groupId>-->
+<!--        <artifactId>log4j-core</artifactId>-->
+<!--        <version>2.17.0</version>-->
+<!--      </dependency>-->
 
-            <dependency>
-                <groupId>jfree</groupId>
-                <artifactId>jfreechart</artifactId>
-                <version>1.0.13</version>
-            </dependency>
-            <dependency>
-                <groupId>jfree</groupId>
-                <artifactId>jcommon</artifactId>
-                <version>1.0.16</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>31.0.1-jre</version>
-            </dependency>
-            <dependency>
-                <groupId>com.influxdb</groupId>
-                <artifactId>influxdb-client-java</artifactId>
-                <version>2.0.0</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-lang</groupId>
-                <artifactId>commons-lang</artifactId>
-                <version>2.6</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-math3</artifactId>
-                <version>3.2</version>
-            </dependency>
-            <!--  TEST DEPENDENCIES  -->
-            <dependency>
-                <groupId>org.testng</groupId>
-                <artifactId>testng</artifactId>
-                <version>7.3.0</version>
-                <scope>test</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+      <dependency>
+        <groupId>com.github.lbordowitz.openforecast</groupId>
+        <artifactId>openforecast</artifactId>
+        <version>0.5.0</version>
+      </dependency>
+      <dependency>
+        <groupId>jfree</groupId>
+        <artifactId>jfreechart</artifactId>
+        <version>1.0.13</version>
+      </dependency>
+      <dependency>
+        <groupId>jfree</groupId>
+        <artifactId>jcommon</artifactId>
+        <version>1.0.16</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>31.0.1-jre</version>
+      </dependency>
+      <dependency>
+        <groupId>org.json</groupId>
+        <artifactId>json</artifactId>
+        <version>20140107</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-lang</groupId>
+        <artifactId>commons-lang</artifactId>
+        <version>2.6</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-math3</artifactId>
+        <version>3.2</version>
+      </dependency>
+
+      <!-- TEST DEPENDENCIES -->
+      <dependency>
+        <groupId>org.testng</groupId>
+        <artifactId>testng</artifactId>
+        <version>7.3.0</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
     <dependencies>
         <!--                 <dependency>-->
         <!--                  <groupId>org.slf4j</groupId>-->
@@ -125,19 +134,15 @@
         <!--                 </dependency>-->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>2.11.2</version>
+            <artifactId>log4j-core</artifactId>
+            <version>2.17.0</version>
         </dependency>
-        <!--  SLF4J Bridge  -->
+
+        <!-- SLF4J Bridge -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
-            <version>2.11.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20140107</version>
+            <version>2.17.0</version>
         </dependency>
         <dependency>
             <groupId>com.github.lbordowitz.openforecast</groupId>
@@ -152,19 +157,9 @@
             <artifactId>jcommon</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.influxdb</groupId>
-            <artifactId>influxdb-java</artifactId>
-            <version>2.21</version>
-        </dependency>
-        <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>4.3.5</version>
-        </dependency>
-        <dependency>
-            <groupId>com.influxdb</groupId>
-            <artifactId>influxdb-client-java</artifactId>
-            <version>3.3.0</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -190,61 +185,55 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.83</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-assembly-plugin -->
         <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <version>3.3.0</version>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-release-plugin -->
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-release-plugin</artifactId>
-            <version>2.5.3</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-deploy-plugin -->
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-deploy-plugin</artifactId>
-            <version>2.8.2</version>
-        </dependency>
-
-
-
     </dependencies>
     <build>
         <plugins>
             <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+            </plugin>
+
+           <plugin>
+             <artifactId>maven-assembly-plugin</artifactId>
+             <configuration>
+               <descriptorRefs>
+                 <descriptorRef>jar-with-dependencies</descriptorRef>
+               </descriptorRefs>
+             </configuration>
+           </plugin>
+
+           <plugin>
+              <artifactId>maven-release-plugin</artifactId>
+              <version>2.5.2</version>
+              <dependencies>
+                <dependency>
+                  <groupId>org.apache.maven.scm</groupId>
+                  <artifactId>maven-scm-provider-gitexe</artifactId>
+                  <version>1.8.1</version>
+                </dependency>
+              </dependencies>
+            </plugin>
+            <plugin>
+              <artifactId>maven-deploy-plugin</artifactId>
+              <version>2.8.2</version>
                 <configuration>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
+                    <!-- 配置本地打包后的本地仓库存储地址，后续上传jar包会从此仓库中去取 -->
+                    <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/maven-repository</altDeploymentRepository>
                 </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.scm</groupId>
-                        <artifactId>maven-scm-provider-gitexe</artifactId>
-                        <version>1.8.1</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            <plugin>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>2.8.2</version>
-                <executions>
-                    <execution>
-                        <id>deploy</id>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>deploy</goal>
-                        </goals>
-                    </execution>
-                </executions>
+<!--              <executions>-->
+<!--                <execution>-->
+<!--                  <id>deploy</id>-->
+<!--                  <phase>deploy</phase>-->
+<!--                  <goals>-->
+<!--                    <goal>deploy</goal>-->
+<!--                  </goals>-->
+<!--                </execution>-->
+<!--              </executions>-->
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -275,6 +264,7 @@
                 <executions>
                     <execution>
                         <id>attach-sources</id>
+                        <phase>package</phase>
                         <goals>
                             <goal>jar</goal>
                         </goals>
@@ -282,29 +272,58 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.5</version>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>0.12</version>
+                <configuration>
+                    <message>Maven artifacts for ${project.artifactId}-${project.version}</message>
+                    <noJekyll>true</noJekyll>
+                    <!-- 指定从哪里去取打好的包，并上传至github -->
+                    <outputDirectory>${project.build.directory}/maven-repository</outputDirectory>
+                    <!--
+                        指定要上传的分支, refs/heads 这个不变，后面的分支名可选，可以采取一个jar包使用一个分支的策略。
+                        若多个jar包同时发布在同一个分支的话，会覆盖。。。。
+                    -->
+                    <branch>refs/heads/main</branch>
+                    <!-- 包含outputDirectory标签内填的文件夹中的所有内容 -->
+                    <includes>
+                        <include>**/*</include>
+                    </includes>
+                    <!-- github远程存储outputDirectory标签内填的文件夹中的内容 -->
+                    <repositoryName>maven-repository</repositoryName>
+<!--                    <repositoryName>https://github.com/qxr777/maven-repository</repositoryName>-->
+                    <!--
+                      github的用户名，注意不是登录的用户名，此项需要登录后，进入https://github.com/settings/profile页面配置Name属性，
+                      否则会报
+                      [ERROR] Failed to execute goal com.github.github:site-maven-plugin:0.12:site
+                      (default) on project rfcore: Error creating commit: Invalid request.
+                      [ERROR] For 'properties/name', nil is not a string.
+                      [ERROR] For 'properties/name', nil is not a string. (422)
+                      [ERROR] -> [Help 1]
+                      的错误
+                    -->
+                    <repositoryOwner>qxr777</repositoryOwner>
+                    <server>github</server>
+                </configuration>
                 <executions>
                     <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
                         <goals>
-                            <goal>sign</goal>
+                            <goal>site</goal>
                         </goals>
+                        <phase>deploy</phase>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.3</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                </configuration>
+<!--            </plugin>-->
+<!--            <plugin>-->
+<!--                <groupId>org.sonatype.plugins</groupId>-->
+<!--                <artifactId>nexus-staging-maven-plugin</artifactId>-->
+<!--                <version>1.6.3</version>-->
+<!--                <extensions>true</extensions>-->
+<!--                <configuration>-->
+<!--                    <serverId>ossrh</serverId>-->
+<!--                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>-->
+<!--                    <autoReleaseAfterClose>true</autoReleaseAfterClose>-->
+<!--                </configuration>-->
             </plugin>
         </plugins>
     </build>
