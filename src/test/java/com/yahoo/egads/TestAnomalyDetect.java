@@ -6,6 +6,8 @@
 
 package com.yahoo.egads;
 
+import com.alibaba.fastjson.JSONObject;
+import com.yahoo.egads.models.tsmm.AutoForecastModel;
 import com.yahoo.egads.models.tsmm.OlympicModel;
 import com.yahoo.egads.models.adm.*;
 import com.yahoo.egads.data.Anomaly.IntervalSequence;
@@ -14,12 +16,38 @@ import java.util.ArrayList;
 import java.util.Properties;
 import java.io.FileInputStream;
 import java.io.InputStream;
+
+import com.yahoo.egads.utilities.HttpsClient;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 // Tests the basic anoamly detection piece of EGADS.
 public class TestAnomalyDetect {
 
+    @Test
+    public void testAutoModel() throws Exception {
+        String configFile = "src/test/resources/sample_config.ini";
+        InputStream is = new FileInputStream(configFile);
+        Properties p = new Properties();
+        p.load(is);
+        HttpsClient getMassage = new HttpsClient();
+        String massage = getMassage.sendGet("http://192.168.100.100:8080/messages?measurement=/SenseHatB/socc3dzf83ty/Temperature&period=7200");
+        JSONObject object = JSONObject.parseObject(massage);
+        com.alibaba.fastjson.JSONArray data1 = com.alibaba.fastjson.JSONArray.parseArray(object.get("data").toString());
+        ArrayList<TimeSeries> actual_metric = com.yahoo.egads.utilities.APIUtils.createTimeSeries(data1, p);
+        ArrayList<TimeSeries> second_metric = com.yahoo.egads.utilities.APIUtils.createTimeSeries(data1, p);
+        TimeSeries.DataSequence td = actual_metric.get(0).data;
+        p.setProperty("MAX_ANOMALY_TIME_AGO", "999999999");
+        p.setProperty("THRESHOLD", "mapee#10,mase#10");
+        AutoForecastModel autoForecastModel = new AutoForecastModel(p);
+        autoForecastModel.train(td);
+        autoForecastModel.predict(td);
+
+        ExtremeLowDensityModel bcm = new ExtremeLowDensityModel(p);
+
+        IntervalSequence anomalies = bcm.detect(second_metric.get(0).data, td);
+        Assert.assertTrue(anomalies.size() > 10);
+    }
     @Test
     public void testOlympicModel() throws Exception {
         // Test cases: ref window: 10, 5

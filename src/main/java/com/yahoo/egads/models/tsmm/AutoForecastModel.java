@@ -31,7 +31,7 @@ import java.util.Properties;
 public class AutoForecastModel extends TimeSeriesAbstractModel {
     // Stores the properties file to init other models.
     private Properties p;
-    
+
     // Stores the model.
     private TimeSeriesAbstractModel myModel = null;
 
@@ -44,8 +44,8 @@ public class AutoForecastModel extends TimeSeriesAbstractModel {
     public void reset() {
         // At this point, reset does nothing.
     }
-    
-    public void train(TimeSeries.DataSequence data) {
+
+    public void train(TimeSeries.DataSequence data) throws Exception {
         // Init all.
         OlympicModel olympModel = new OlympicModel(p);
         MovingAverageModel movingAvg = new MovingAverageModel(p);
@@ -57,7 +57,7 @@ public class AutoForecastModel extends TimeSeriesAbstractModel {
         TripleExponentialSmoothingModel tripleExp = new TripleExponentialSmoothingModel(p);
         WeightedMovingAverageModel weightAvg = new WeightedMovingAverageModel(p);
         DoubleExponentialSmoothingModel doubleExp = new DoubleExponentialSmoothingModel(p);
-        
+
         // Train all.
         olympModel.train(data);
         movingAvg.train(data);
@@ -69,7 +69,7 @@ public class AutoForecastModel extends TimeSeriesAbstractModel {
         tripleExp.train(data);
         weightAvg.train(data);
         doubleExp.train(data);
-        
+
         // Pick best.
         if (betterThan(olympModel, myModel)) {
             myModel = olympModel;
@@ -101,9 +101,9 @@ public class AutoForecastModel extends TimeSeriesAbstractModel {
         if (betterThan(doubleExp, myModel)) {
             myModel = doubleExp;
         }
-        
+
         initForecastErrors(myModel, data);
-       
+
         logger.debug(getBias() + "\t" + getMAD() + "\t" + getMAPE() + "\t" + getMSE() + "\t" + getSAE() + "\t" + 0 + "\t" + 0);
     }
 
@@ -116,7 +116,7 @@ public class AutoForecastModel extends TimeSeriesAbstractModel {
     }
 
     public void predict(TimeSeries.DataSequence sequence) throws Exception {
-        myModel.predict(sequence);        
+        myModel.predict(sequence);
     }
 
     public void toJson(JSONStringer json_out) {
