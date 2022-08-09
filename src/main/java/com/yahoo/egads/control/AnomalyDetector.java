@@ -46,7 +46,7 @@ import com.yahoo.egads.models.adm.AnomalyDetectionModel;
 
 public class AnomalyDetector {
 
-    protected TimeSeries metric = null;
+    public TimeSeries metric = null;
     protected ArrayList<AnomalyDetectionModel> models = new ArrayList<AnomalyDetectionModel>();
     protected ArrayList<Boolean> isTuned = new ArrayList<Boolean>();
     protected long firstTimeStamp = 0;

@@ -57,6 +57,7 @@ public class AutoForecastModel extends TimeSeriesAbstractModel {
         TripleExponentialSmoothingModel tripleExp = new TripleExponentialSmoothingModel(p);
         WeightedMovingAverageModel weightAvg = new WeightedMovingAverageModel(p);
         DoubleExponentialSmoothingModel doubleExp = new DoubleExponentialSmoothingModel(p);
+        SmartTrainModel smartTrainModel = new SmartTrainModel(p);
 
         // Train all.
         olympModel.train(data);
@@ -69,6 +70,7 @@ public class AutoForecastModel extends TimeSeriesAbstractModel {
         tripleExp.train(data);
         weightAvg.train(data);
         doubleExp.train(data);
+        smartTrainModel.train(data);
 
         // Pick best.
         if (betterThan(olympModel, myModel)) {
