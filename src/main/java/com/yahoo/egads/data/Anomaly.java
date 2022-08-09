@@ -121,7 +121,7 @@ public class Anomaly implements JsonAble {
             Date endDate = (endTime == null) ? null : new Date(
                     endTime.longValue() * 1000);
             SimpleDateFormat dateFormat = new SimpleDateFormat(
-                    "yyyy-MM-dd_hh:mm"); // Locale.UK);
+                    "yyyy-MM-dd_HH:mm"); // Locale.UK);
             String startStr = dateFormat.format(startDate);
             String endStr = (endDate == null) ? "" : " to "
                     + dateFormat.format(endDate);
