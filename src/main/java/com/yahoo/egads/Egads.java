@@ -57,7 +57,6 @@ public class Egads {
         } else {
             ip = new StdinProcessor();
         }
-
         // Process the input the we received (either STDIN or as a file).
         ip.processInput(p);
         long endTime=System.currentTimeMillis(); //获取结束时间

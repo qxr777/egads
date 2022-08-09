@@ -39,7 +39,7 @@ public class ProcessableObjectFactory {
         return (new UpdateModelProcessable(ma, ts.data, config));
     }
 
-    private static ModelAdapter buildTSModel(TimeSeries ts, Properties config) {
+    public static ModelAdapter buildTSModel(TimeSeries ts, Properties config) {
         ModelAdapter ma = null;
         try {
             Long period = (long) -1;
@@ -66,7 +66,7 @@ public class ProcessableObjectFactory {
         return ma;
     }
 
-    private static AnomalyDetector buildAnomalyModel(TimeSeries ts, Properties config) {
+    public static AnomalyDetector buildAnomalyModel(TimeSeries ts, Properties config) {
         AnomalyDetector ad = null;
         try {
             Long period = (long) -1;

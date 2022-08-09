@@ -37,7 +37,7 @@ import com.yahoo.egads.models.tsmm.TimeSeriesModel;
 
 public class ModelAdapter { // Encapsulates a metric and the models operating on it
 
-    protected TimeSeries metric = null;
+    public TimeSeries metric = null;
     protected ArrayList<TimeSeriesModel> models = new ArrayList<TimeSeriesModel>();
     protected ArrayList<Boolean> isTrained = new ArrayList<Boolean>();
     protected long firstTimeStamp = 0;

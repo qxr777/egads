@@ -7,20 +7,21 @@
 package com.yahoo.egads;
 
 import com.alibaba.fastjson.JSONObject;
-import com.yahoo.egads.models.tsmm.AutoForecastModel;
+import com.yahoo.egads.control.AnomalyDetector;
+import com.yahoo.egads.control.ModelAdapter;
+import com.yahoo.egads.control.ProcessableObjectFactory;
 import com.yahoo.egads.models.tsmm.OlympicModel;
 import com.yahoo.egads.models.adm.*;
 import com.yahoo.egads.data.Anomaly.IntervalSequence;
 import com.yahoo.egads.data.*;
-import java.util.ArrayList;
-import java.util.Properties;
+
+import java.util.*;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
 import com.yahoo.egads.utilities.HttpsClient;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 // Tests the basic anoamly detection piece of EGADS.
 public class TestAnomalyDetect {
 
@@ -37,16 +38,23 @@ public class TestAnomalyDetect {
         ArrayList<TimeSeries> actual_metric = com.yahoo.egads.utilities.APIUtils.createTimeSeries(data1, p);
         ArrayList<TimeSeries> second_metric = com.yahoo.egads.utilities.APIUtils.createTimeSeries(data1, p);
         TimeSeries.DataSequence td = actual_metric.get(0).data;
-        p.setProperty("MAX_ANOMALY_TIME_AGO", "999999999");
-        p.setProperty("THRESHOLD", "mapee#10,mase#10");
-        AutoForecastModel autoForecastModel = new AutoForecastModel(p);
-        autoForecastModel.train(td);
-        autoForecastModel.predict(td);
+        ModelAdapter ma = ProcessableObjectFactory.buildTSModel(actual_metric.get(0), p);
+        AnomalyDetector ad = ProcessableObjectFactory.buildAnomalyModel(actual_metric.get(0), p);
+        ma.reset();
+        ma.train();
+        ArrayList<TimeSeries.DataSequence> list = ma.forecast(
+                ma.metric.startTime(), ma.metric.lastTime());
+        ArrayList<Anomaly> anomalyList = new ArrayList<>();
+        IntervalSequence intervals = new IntervalSequence();
+        for (TimeSeries.DataSequence ds : list) {
+            ad.reset();
+            ad.tune(ds);
 
-        ExtremeLowDensityModel bcm = new ExtremeLowDensityModel(p);
-
-        IntervalSequence anomalies = bcm.detect(second_metric.get(0).data, td);
-        Assert.assertTrue(anomalies.size() > 10);
+            anomalyList = ad.detect(ad.metric, ds);
+            Anomaly anomaly = anomalyList.get(0);
+            intervals = anomaly.intervals;
+        }
+        Assert.assertTrue(intervals.size()>0);
     }
     @Test
     public void testOlympicModel() throws Exception {
